@@ -9,9 +9,13 @@ Checkout notes.txt for more useful information
 
 Complete separation of **Pydantic** Schemas (DTOs) and **SQLAlchemy** ORM (Models) to minimize human-error of accidentally showing internal fields to users.
 
+## Notes
+Migration folders/files had been included to make it easier for docker deployment (development)
+
 ## To run
 
 Install Docker and Docker Compose
+
 To run:
 ```
 docker compose up --build
