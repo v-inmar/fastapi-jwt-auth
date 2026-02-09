@@ -29,8 +29,10 @@ localhost:5000/docs
 This will show you the endpoints
 
 ## Endpoints
-**/api/auth/signup**
-**/api/auth/login**
-**/api/auth/logout**
-**/api/auth/refresh**
-**/api/protected/me** <--This needs Authorization: Bearer <access token> header
+```
+/api/auth/signup
+/api/auth/login
+/api/auth/logout
+/api/auth/refresh
+/api/protected/me <--This needs Authorization: Bearer <access token> header
+```
