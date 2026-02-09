@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: fastapi-jwt-auth-app
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: changemeonprod
+      DATABASE_URL: postgresql+asyncpg://postgres:mysecretpassword@db:5432/mydb
+      JWT_ACCESS_SECRET: kxq8mR9vP2nL7wE4sT6yU1aZ5cX8bN3dH6fJ9vM2qW7eP5rT8uY2wQ4eX7zK9mN1
+      JWT_REFRESH_SECRET: zT4nK8vR2qX7mP9wL3cE6aY1sN5dF8hJ2vM7pQ4wE9rT6uK3sL8nD1fX5vB7mN4
+      
+    depends_on:
+      - db
+    networks:
+      - fastapi_jwt_auth_network
+
+  db:
+    image: postgres:18
+    container_name: fastapi-jwt-auth-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - fastapi_jwt_auth_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+
+networks:
+  fastapi_jwt_auth_network:
+    driver: bridge

@@ -1,0 +1,28 @@
+alembic.ini contains db url
+i.e.
+sqlalchemy.url = postgresql://postgres:mysecretpassword@db:5432/mydb
+note: the host is db because it is geared for docker compose 
+if local development (non docker) is preferred, change these details 
+
+
+Migrating new/ammended tables
+1. make sure all are tables in alembic/env.py
+2. run alembic revision --autogenerate -m "your message"
+3. alembic upgrade head
+
+Using docker compose
+    - the entrypoint.sh runs alembic upgrade head because 
+    docker container will have a copy of the alembic migrations
+    - no need to run migrations manually, let docker do it
+
+
+entrypoint.sh is used to make sure that fastapi/migration does not run
+before postgresql is running and accepting connections.
+
+Docker compose has all the needed env variables
+however, if you want to run local (non docker) make sure you have
+.env
+.example_env contain some example values needed inside .env
+
+
+Make sure to use virtualenv (or similar) on local development.
